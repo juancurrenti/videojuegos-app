@@ -1,0 +1,199 @@
+/* ---------------------------------------------------------
+   Importaciones y Directivas de Tailwind
+--------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------
+   Estilos Personalizados de Componentes con @layer
+--------------------------------------------------------- */
+@layer components {
+  .genre-badge {
+    background-color: #74027e;
+    color: #00ff88;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+  }
+  .platform-badge {
+    background-color: #3b82f6;
+    color: #60a5fa;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+  }
+  .prose-invert {
+    color: #d1d5db;
+  }
+  .prose-invert a {
+    color: #60a5fa;
+  }
+  .prose-invert a:hover {
+    color: #93c5fd;
+  }
+  .prose-invert strong {
+    color: #ffffff;
+    font-weight: 600;
+  }
+}
+
+/* ---------------------------------------------------------
+   Overrides y Utilidades Personalizadas
+--------------------------------------------------------- */
+input.form-control::placeholder {
+  color: rgb(255, 255, 255) !important;
+  opacity: 1 !important;
+}
+.btn-outline-light:hover {
+  background-color: transparent !important;
+  border-color: #f8f9fa !important;
+  color: #f8f9fa !important;
+}
+
+/* ---------------------------------------------------------
+   Estilos Globales y de Tipografía
+--------------------------------------------------------- */
+:root {
+  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: #ffffff;
+  background-color: #111827;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  color: #ffffff !important;
+}
+
+/* ---------------------------------------------------------
+   Estilos de Layout y Estructura
+--------------------------------------------------------- */
+body {
+  background-color: #111827 !important;
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------
+   Estilos de Tipografía y Elementos Textuales
+--------------------------------------------------------- */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+/* ---------------------------------------------------------
+   Estilos de Botones
+--------------------------------------------------------- */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* ---------------------------------------------------------
+   Estilos Responsivos y de Modo Claro
+--------------------------------------------------------- */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+@media (max-width: 640px) {
+  .game-card {
+    margin: 0 10px;
+  }
+}
+
+/* ---------------------------------------------------------
+   Efectos y Animaciones
+--------------------------------------------------------- */
+
+.hover-shadow {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 255, 136, 0.1);
+}
+
+.bg-dark {
+  background-color: #121212 !important;
+}
+
+.border-secondary {
+  border-color: #2a2a2a !important;
+}
+
+.game-card:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.game-list {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1.5s linear infinite;
+}
