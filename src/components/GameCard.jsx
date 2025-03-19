@@ -2,35 +2,34 @@ import { Link } from 'react-router-dom';
 import { Badge } from 'react-bootstrap';
 
 /**
- * Componente que muestra una tarjeta de juego con imagen, nombre y un boton de detalles
- *
- * La tarjeta muestra una imagen de fondo con un efecto de zoom al pasar el cursor,
- * y en la esquina superior derecha se muestra un badge con el año de lanzamiento (o "Classic")
- * En la parte inferior se muestra un boton que redirige a la pagina de detalles del juego
- *
- * @param {Object} props Propiedades del componente
- * @param {Object} props.game Objeto que contiene los datos del juego
- * @returns {JSX.Element} La tarjeta de juego
+ * Componente que muestra una tarjeta de juego con imagen, nombre y un boton de detalles.
  */
 const GameCard = ({ game }) => {
   return (
     <div className="group relative bg-gray-800/50 hover:bg-gray-800/80 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:border-neon-green">
+      {/* Contenedor de la imagen */}
       <div className="relative overflow-hidden">
-        <img
-          src={game.background_image}
-          alt={game.name}
-          className="w-full h-56 object-cover transform transition-transform duration-500 group-hover:scale-105"
-        />
+        {/* Envoltura de la imagen en un <Link> para redirigir al hacer clic */}
+        <Link to={`/game/${game.id}`} className="block">
+          <img
+            src={game.background_image}
+            alt={game.name}
+            className="w-full h-56 object-cover transform transition-transform duration-500 group-hover:scale-105"
+          />
+        </Link>
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
         
+        {/* Badge con el año de lanzamiento o "Classic" */}
         <Badge pill bg="success" className="position-absolute top-2 end-2 fs-6">
           {game.released ? new Date(game.released).getFullYear() : "Classic"}
         </Badge>
       </div>
 
+      {/* Contenido de la tarjeta */}
       <div className="p-4">
         <h3 className="text-white fw-bold fs-5 mb-3 truncate">{game.name}</h3>
         <div className="d-flex justify-content-between align-items-center">
+          {/* Botón de detalles (se mantiene) */}
           <Link
             to={`/game/${game.id}`}
             className="btn btn-sm btn-outline-light d-flex align-items-center gap-2"
