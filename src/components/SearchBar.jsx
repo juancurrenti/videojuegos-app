@@ -8,19 +8,20 @@
  * @returns {JSX.Element} El componente Searchbar
  */
 const Searchbar = ({ onSearch }) => {
-    return (
-      <div className="flex-1">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Busqueda..."
-            onChange={(e) => onSearch(e.target.value)}
-            className="w-full px-5 py-4 bg-gray-700/50 backdrop-blur-sm text-white rounded-xl border-2 border-gray-600 focus:border-neon-green focus:ring-4 focus:ring-neon-green/20 transition-all outline-none"
-          />
-        </div>
+  return (
+    <div className="flex-1">
+      <div className="relative">
+        <input
+          type="text"
+          placeholder="Busqueda..."
+          onChange={(e) => onSearch(e.target.value)}
+          className="w-full px-4 py-2 bg-gray-700/50 backdrop-blur-sm text-white 
+                     rounded-xl border-2 border-gray-600 focus:border-neon-green 
+                     focus:ring-4 focus:ring-neon-green/20 transition-all outline-none"
+        />
       </div>
-    );
-  };
-  
-  export default Searchbar;
-  
+    </div>
+  );
+};
+
+export default Searchbar;

@@ -15,7 +15,6 @@ import { Badge } from 'react-bootstrap';
 const GameCard = ({ game }) => {
   return (
     <div className="group relative bg-gray-800/50 hover:bg-gray-800/80 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:border-neon-green">
-      {/* Se envuelve todo el contenedor de la imagen en Link */}
       <Link to={`/game/${game.id}`}>
         <div className="relative overflow-hidden">
           <img
@@ -30,7 +29,6 @@ const GameCard = ({ game }) => {
         </div>
       </Link>
       <div className="p-4">
-        {/* Se envuelve el título en Link */}
         <Link to={`/game/${game.id}`} className="text-white fw-bold fs-5 mb-3 text-decoration-none">
           <h3 className="mb-0 truncate">{game.name}</h3>
         </Link>

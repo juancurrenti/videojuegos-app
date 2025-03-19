@@ -19,7 +19,7 @@ const Home = () => {
   /**
    * Maneja la busqueda de juegos basandose en la consulta ingresada
    *
-   * @param {string} query - Texto de busqueda ingresado por el usuario
+   * @param {string} query Texto de busqueda ingresado por el usuario
    */
   const handleSearch = async (query) => {
     try {
@@ -33,7 +33,7 @@ const Home = () => {
   /**
    * Maneja el cambio de filtros y actualiza el listado de juegos
    *
-   * @param {Object} filter - Objeto que contiene los filtros seleccionados (año, plataforma, tag, developer)
+   * @param {Object} filter Objeto que contiene los filtros seleccionados (año, plataforma, tag, developer)
    */
   const handleFilterChange = async (filter) => {
     try {
@@ -45,7 +45,7 @@ const Home = () => {
   };
 
   /**
-   * Limpia los filtros y recarga la página
+   * Limpia los filtros y recarga la pagina
    */
   const handleClearFilters = () => {
     window.location.reload();
@@ -77,7 +77,6 @@ const Home = () => {
               <Searchbar onSearch={handleSearch} />
             </Col>
             <Col md={4}>
-              {/* Menú desplegable para los filtros */}
               <Dropdown>
                 <Dropdown.Toggle variant="secondary" id="dropdown-filters">
                   Filtros

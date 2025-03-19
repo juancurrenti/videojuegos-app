@@ -1,8 +1,6 @@
-// Importacion de estilos globales y de Bootstrap
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// Importacion de dependencias de React y ReactDOM
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
