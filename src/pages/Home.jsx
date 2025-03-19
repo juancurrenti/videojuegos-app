@@ -3,25 +3,23 @@ import { getTopGames, getGamesWithFilters, searchGames } from "../services/rawgA
 import GameCard from "../components/GameCard";
 import Filters from "../components/Filters";
 import Searchbar from "../components/SearchBar";
-import { Container, Row, Col, Card, Badge } from "react-bootstrap";
+import { Container, Row, Col, Card, Badge, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 /**
- * Componente Home.
- * Página principal que muestra un listado de videojuegos. Permite buscar y filtrar juegos
- * usando los componentes Searchbar y Filters, y utiliza la API RAWG para obtener los datos.
+ * Componente Home
+ * Pagina principal que muestra un listado de videojuegos. Permite buscar y filtrar juegos
+ * usando los componentes Searchbar y Filters, y utiliza la API RAWG para obtener los datos
  *
- * @returns {JSX.Element} La página principal de videojuegos.
+ * @returns {JSX.Element} La pagina principal de videojuegos
  */
 const Home = () => {
   const [games, setGames] = useState([]);
-  // Estado para mostrar/ocultar filtros
-  const [showFilters, setShowFilters] = useState(true);
 
   /**
-   * Maneja la búsqueda de juegos basada en la consulta ingresada.
+   * Maneja la busqueda de juegos basandose en la consulta ingresada
    *
-   * @param {string} query - Texto de búsqueda ingresado por el usuario.
+   * @param {string} query - Texto de busqueda ingresado por el usuario
    */
   const handleSearch = async (query) => {
     try {
@@ -33,9 +31,9 @@ const Home = () => {
   };
 
   /**
-   * Maneja el cambio de filtros y actualiza el listado de juegos.
+   * Maneja el cambio de filtros y actualiza el listado de juegos
    *
-   * @param {Object} filter - Objeto que contiene los filtros seleccionados (año, plataforma, tag, developer).
+   * @param {Object} filter - Objeto que contiene los filtros seleccionados (año, plataforma, tag, developer)
    */
   const handleFilterChange = async (filter) => {
     try {
@@ -46,12 +44,17 @@ const Home = () => {
     }
   };
 
-  // Carga inicial de juegos
+  /**
+   * Limpia los filtros y recarga la página
+   */
+  const handleClearFilters = () => {
+    window.location.reload();
+  };
+
   useEffect(() => {
     const fetchGames = async () => {
       try {
         const data = await getTopGames();
-        // Filtra juegos duplicados
         const uniqueGames = data.filter(
           (game, index, self) => self.findIndex(g => g.id === game.id) === index
         );
@@ -67,36 +70,76 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-900">
       <Container className="py-5 text-light">
-        {/* Encabezado con búsqueda y filtros */}
         <div className="bg-gray-800 p-4 rounded-xl mb-8 shadow-lg">
           <Row className="align-items-center">
             <Col md={8} className="mb-3 mb-md-0">
               <h1 className="display-5 fw-bold mb-1">Video Juegos</h1>
               <Searchbar onSearch={handleSearch} />
             </Col>
-
-            {/* Botón para mostrar/ocultar los filtros */}
             <Col md={4}>
-              <button
-                onClick={() => setShowFilters(!showFilters)}
-                className="btn btn-sm btn-outline-light mb-2"
-              >
-                {showFilters ? "Ocultar Filtros" : "Mostrar Filtros"}
-              </button>
-
-              {/* Si showFilters es true, renderizamos el componente de filtros */}
-              {showFilters && (
-                <Filters onFilter={handleFilterChange} />
-              )}
+              {/* Menú desplegable para los filtros */}
+              <Dropdown>
+                <Dropdown.Toggle variant="secondary" id="dropdown-filters">
+                  Filtros
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="bg-dark text-light p-3 border-0">
+                  <Filters onFilter={handleFilterChange} />
+                  <hr />
+                  <button
+                    className="btn btn-sm btn-outline-light"
+                    onClick={handleClearFilters}
+                  >
+                    Limpiar Filtros
+                  </button>
+                </Dropdown.Menu>
+              </Dropdown>
             </Col>
           </Row>
         </div>
-
-        {/* Listado de juegos */}
         <Row xs={1} md={2} lg={3} xl={4} className="g-4">
           {games.map((game) => (
             <Col key={game.id}>
-              <GameCard game={game} />
+              <Card className="h-100 bg-dark border-secondary hover-shadow">
+                <Link to={`/game/${game.id}`}>
+                  <Card.Img
+                    variant="top"
+                    src={game.background_image}
+                    style={{ height: "200px", objectFit: "cover" }}
+                  />
+                </Link>
+                <Card.Body className="d-flex flex-column">
+                  <div className="d-flex justify-content-between align-items-start mb-3">
+                    <Card.Title className="text-light fs-5">
+                      <Link to={`/game/${game.id}`} className="text-light text-decoration-none">
+                        {game.name}
+                      </Link>
+                    </Card.Title>
+                    <div className="d-flex flex-column align-items-center">
+                      <Badge
+                        pill
+                        className={`fs-5 ${
+                          game.metacritic >= 75
+                            ? "bg-success"
+                            : game.metacritic >= 50
+                            ? "bg-warning text-dark"
+                            : "bg-danger"
+                        }`}
+                      >
+                        {game.metacritic || "NR"}
+                      </Badge>
+                      <span className="text-muted small mt-1">Metascore</span>
+                    </div>
+                  </div>
+                  <div className="mt-auto d-flex justify-content-between align-items-center">
+                    <Link
+                      to={`/game/${game.id}`}
+                      className="btn btn-sm btn-outline-indigo"
+                    >
+                      Detalles
+                    </Link>
+                  </div>
+                </Card.Body>
+              </Card>
             </Col>
           ))}
         </Row>
