@@ -89,7 +89,7 @@ const Home = () => {
                     className="btn btn-sm btn-outline-light"
                     onClick={handleClearFilters}
                   >
-                    Limpiar Filtros
+                    Limpiar Filtros Y Recargar Web
                   </button>
                 </Dropdown.Menu>
               </Dropdown>
